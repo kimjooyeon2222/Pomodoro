@@ -10,7 +10,7 @@ const QUOTE_DISPLAY = document.getElementById("quote_display");
 
 // Constants
 const ONE_SECOND_IN_MS = 1000;
-const INITIAL_TIME = 5;
+const INITIAL_TIME = 15;
 
 const TIMER_IS_UP_TEXT = "Time is up!";
 const STOP_TEXT = "Stop";
@@ -60,6 +60,7 @@ function toggleTimer() {
 // Function: secondsLeft 초기화
 function resetTimer() {
     secondsLeft = INITIAL_TIME;
+    PROGRESS.value = INITIAL_TIME;
     stopTimer();
     updateDisplay();
 }
@@ -72,8 +73,11 @@ function stopTimer() {
 }
 
 function startTimer() {
+    PROGRESS.max = secondsLeft;
+    PROGRESS.value = secondsLeft;
     timer = setInterval(() => {
         secondsLeft--;
+        PROGRESS.value--;
         updateDisplay();
         if (secondsLeft === 0) {
             resetTimer();
@@ -84,7 +88,7 @@ function startTimer() {
 }
 
 updateDisplay();
-fetchQuote();    
+fetchQuote();
 START.addEventListener("click", toggleTimer);
 RESET.addEventListener("click", resetTimer);
 QUOTE.addEventListener("click", fetchQuote);
