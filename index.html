@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://classless.de/classless.css">
+    <link rel="stylesheet" href="./styles.css">
     <title>Pomodoro Timer</title>
 </head>
 
@@ -13,7 +13,9 @@
     <h6 id="quote_display">Stay Focused</h6>
     <img style="clip-path: circle();" src="https://media.tenor.com/adho7VbkF1wAAAAM/lofi-girl.gif">
     <p id="timer_display">15:00</p>
-    <progress id="progress" max="100" value="100"></progress>
+    <div> <!--div로 묶음으로써 \n 역할-->
+        <progress id="progress" max="0" value="0"></progress>
+    </div>
     <button id="start">Start</button>
     <button id="reset">Reset</button>
     <button id="quote">Quote</button>

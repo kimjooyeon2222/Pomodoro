@@ -11,11 +11,9 @@ const QUOTE_DISPLAY = document.getElementById("quote_display");
 // Constants
 const ONE_SECOND_IN_MS = 1000;
 const INITIAL_TIME = 15;
-
 const TIMER_IS_UP_TEXT = "Time is up!";
 const STOP_TEXT = "Stop";
 const START_TEXT = "Start";
-
 const QUOTE_API = "https://api.quotable.io/random?tags=inspirational";
 
 // Variables
@@ -24,7 +22,7 @@ let secondsLeft = INITIAL_TIME;
 
 // Function: Fetch quotes from QUOTE API
 function fetchQuote() {
-    fetch('https://api.quotable.io/random?tags=inspirational')
+    fetch(QUOTE_API)
         .then(res => res.json())
         .then(data => {
             console.log(data);
@@ -60,7 +58,8 @@ function toggleTimer() {
 // Function: secondsLeft 초기화
 function resetTimer() {
     secondsLeft = INITIAL_TIME;
-    PROGRESS.value = INITIAL_TIME;
+    PROGRESS.max = 15;
+    PROGRESS.value = 0;
     stopTimer();
     updateDisplay();
 }
@@ -73,11 +72,11 @@ function stopTimer() {
 }
 
 function startTimer() {
-    PROGRESS.max = secondsLeft;
-    PROGRESS.value = secondsLeft;
+    PROGRESS.max = 15;
+    PROGRESS.value = 0;
     timer = setInterval(() => {
         secondsLeft--;
-        PROGRESS.value--;
+        PROGRESS.value++;
         updateDisplay();
         if (secondsLeft === 0) {
             resetTimer();
@@ -89,6 +88,7 @@ function startTimer() {
 
 updateDisplay();
 fetchQuote();
+
 START.addEventListener("click", toggleTimer);
 RESET.addEventListener("click", resetTimer);
 QUOTE.addEventListener("click", fetchQuote);
